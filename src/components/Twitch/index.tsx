@@ -162,7 +162,7 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
     componentDidMount() {
         this.refresh();
 
-        setTimeout(() => {
+        setInterval(() => {
             this.refresh();
         }, 60_000);
     }
@@ -176,13 +176,13 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
 
         const streams = await this.getStreams(userIDs);
 
-        streams.sort((a, b) => a.user_name.toLocaleLowerCase().localeCompare(b.user_name.toLocaleLowerCase()));
+        streams.sort((a, b) => b.viewer_count - a.viewer_count);
 
         this.setState({ streams });
     }
 
     private readonly getThumbnail = (url: string) => {
-        return url.replace(/%?{width}x%?{height}/, "96x54");
+        return url.replace(/%?{width}x%?{height}/, "160x90");
     }
 
     private readonly format = (number: number) => {
@@ -206,7 +206,7 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
                     return (
                         <div key={ stream.id } className="twitch--stream">
                             <div className="twitch--stream__pic">
-                                <img src={ this.getThumbnail(stream.thumbnail_url) } alt={ stream.user_name } />
+                                <img src={ this.getThumbnail(stream.thumbnail_url) + "?" + Date.now() } alt={ stream.user_name } />
                             </div>
 
                             <div className="twitch--stream__container">

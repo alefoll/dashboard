@@ -10,24 +10,24 @@
 
 .twitch-logo {
     position: absolute;
-    left: -40px;
-    top: 8px;
-    height: 32px;
-    width: 32px;
+    left: -56px;
+    top: 16px;
+    height: 48px;
+    width: 48px;
 }
 
 .twitch--stream {
     background-color: #26262b;
-    width: 256px;
+    width: 400px;
     border-radius: 8px;
-    margin: 8px 8px 0 0;
+    margin: 16px 16px 0 0;
     display: flex;
     align-items: center;
     overflow: hidden;
 }
 
 .twitch--stream__pic {
-    height: 54px;
+    height: 90px;
     max-width: 100%;
     flex: 0 0 auto;
 }
@@ -42,6 +42,7 @@
     flex-direction: column;
     padding: 8px;
     flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .twitch--stream__info {
@@ -56,14 +57,18 @@
     font-weight: 500;
     margin: 0;
     padding: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .twitch--stream__name {
     display: inline-block;
+    font-size: 30px;
 }
 
 .twitch--stream__viewer {
-    font-size: 16px;
+    font-size: 26px;
 }
 
 .twitch--stream__viewer::before {
@@ -77,6 +82,6 @@
 }
 
 .twitch--stream__game {
-    font-size: 13px;
+    font-size: 24px;
 }
 

@@ -18,20 +18,35 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
         plugins: {
             legend: {
                 display: false,
-            }
+            },
         },
         scales: {
             y: {
                 grid: {
-                    color: "#3E3E40",
-                }
+                    color: "rgba(255, 255, 255, .8)",
+                },
+                ticks: {
+                    color: "#ffffff",
+                    font: {
+                        family: "Product Sans",
+                        size: 20,
+                    },
+                },
             },
             x: {
                 grid: {
                     display: false,
-                }
+                },
+                ticks: {
+                    color: "#ffffff",
+                    autoSkipPadding: 36,
+                    font: {
+                        family: "Product Sans",
+                        size: 20,
+                    },
+                },
             },
-        }
+        },
     }
 
     constructor(props: {}) {
@@ -83,8 +98,8 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
                 datasets: [{
                     data: values,
                     fill: false,
-                    backgroundColor: '#80BFEA',
-                    borderColor: '#80BFEA',
+                    backgroundColor: "#80BFEA",
+                    borderColor: "#80BFEA",
                     tension: 0.4,
                 }],
             },
@@ -97,7 +112,7 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
 
         return (
             <div className="fitness">
-                <Line type="line" height={ 320 } width={ 1920 } data={ this.state.data } options={ this.options } />
+                <Line type="line" height={ 370 } width={ 1920 } data={ this.state.data } options={ this.options } />
             </div>
         );
     }
