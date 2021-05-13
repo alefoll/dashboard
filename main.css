@@ -1,0 +1,178 @@
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/Product-Sans.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+html,
+body,
+#app {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: Product Sans;
+    color: #ffffff;
+    background-color: rgb(14, 14, 16);
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.calendar {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    z-index: 200;
+}
+
+.calendar--container {
+    position: relative;
+    margin: 0 auto;
+    padding: 16px 24px 24px;
+    background-color: #26262b;
+    border-radius: 4px;
+}
+
+.calendar--logo {
+    position: absolute;
+    top: 0;
+    right: -40px;
+    height: 32px;
+    width: 32px;
+}
+
+.fitness {
+    z-index: 200;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.time {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.time--container {
+    position: relative;
+}
+
+.time--container__date {
+    position: absolute;
+    top: -56px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 56px;
+}
+
+.time--container__time {
+    font-size: 256px;
+    font-variant-numeric: tabular-nums;
+}
+
+.twitch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    z-index: 300;
+}
+
+.twitch-logo {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+    height: 32px;
+    width: 32px;
+}
+
+.twitch--stream {
+    background-color: #26262b;
+    width: 256px;
+    border-radius: 8px;
+    margin: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.twitch--stream__pic {
+    height: 54px;
+    max-width: 100%;
+    flex: 0 0 auto;
+}
+
+.twitch--stream__pic img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.twitch--stream__container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    flex: 1 1 auto;
+}
+
+.twitch--stream__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.twitch--stream__name,
+.twitch--stream__game {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+
+.twitch--stream__name {
+    display: inline-block;
+}
+
+.twitch--stream__viewer {
+    font-size: 16px;
+}
+
+.twitch--stream__viewer::before {
+    content: "";
+    display: inline-block;
+    margin: 0 4px 2px 0;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.twitch--stream__game {
+    font-size: 13px;
+}
+
+
+
