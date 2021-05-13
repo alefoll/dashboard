@@ -10,7 +10,7 @@ interface FitnessState {
     data: any,
 }
 
-export class Fitness extends React.PureComponent<{}, FitnessState> {
+export class Fitness extends React.Component<{}, FitnessState> {
     private options = {
         events: [],
         maintainAspectRatio: false,
@@ -23,7 +23,9 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
         scales: {
             y: {
                 grid: {
+                    borderDash: [10, 10],
                     color: "rgba(255, 255, 255, .8)",
+                    tickWidth: 0,
                 },
                 ticks: {
                     color: "#ffffff",
@@ -57,9 +59,9 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
         }
     }
 
-    async componentDidMount() {
+    private async getData() {
         const endDate   = DateTime.now();
-        const startDate = endDate.minus({ month: 6 });
+        const startDate = endDate.minus({ month: 4 });
 
         const format = "dd LLL";
 
@@ -89,9 +91,6 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
             }
         }) ?? [];
 
-
-        console.log(values);
-
         this.setState({
             data: {
                 labels,
@@ -104,6 +103,18 @@ export class Fitness extends React.PureComponent<{}, FitnessState> {
                 }],
             },
         });
+    }
+
+    componentDidMount() {
+        this.getData();
+
+        setInterval(() => {
+            this.getData();
+        }, 60_000);
+    }
+
+    shouldComponentUpdate(nextProps: {}, nextState: FitnessState) {
+        return JSON.stringify(this.state.data) !== JSON.stringify(nextState.data);
     }
 
     render() {
