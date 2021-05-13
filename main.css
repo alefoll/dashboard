@@ -27,12 +27,12 @@ body,
 
 .calendar {
     position: absolute;
-    left: 8px;
-    top: 8px;
+    left: 16px;
+    top: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 20px;
+    font-size: 28px;
     z-index: 200;
 }
 
@@ -47,9 +47,9 @@ body,
 .calendar--logo {
     position: absolute;
     top: 0;
-    right: -40px;
-    height: 32px;
-    width: 32px;
+    right: -56px;
+    height: 48px;
+    width: 48px;
 }
 
 .fitness {
@@ -104,24 +104,24 @@ body,
 
 .twitch-logo {
     position: absolute;
-    left: -40px;
-    top: 8px;
-    height: 32px;
-    width: 32px;
+    left: -56px;
+    top: 16px;
+    height: 48px;
+    width: 48px;
 }
 
 .twitch--stream {
     background-color: #26262b;
-    width: 256px;
+    width: 400px;
     border-radius: 8px;
-    margin: 8px 8px 0 0;
+    margin: 16px 16px 0 0;
     display: flex;
     align-items: center;
     overflow: hidden;
 }
 
 .twitch--stream__pic {
-    height: 54px;
+    height: 90px;
     max-width: 100%;
     flex: 0 0 auto;
 }
@@ -136,6 +136,7 @@ body,
     flex-direction: column;
     padding: 8px;
     flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .twitch--stream__info {
@@ -150,14 +151,18 @@ body,
     font-weight: 500;
     margin: 0;
     padding: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .twitch--stream__name {
     display: inline-block;
+    font-size: 30px;
 }
 
 .twitch--stream__viewer {
-    font-size: 16px;
+    font-size: 26px;
 }
 
 .twitch--stream__viewer::before {
@@ -171,7 +176,7 @@ body,
 }
 
 .twitch--stream__game {
-    font-size: 13px;
+    font-size: 24px;
 }
 
 
