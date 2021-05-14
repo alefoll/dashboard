@@ -28,8 +28,8 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
 
         const time = DateTime.now();
 
-        const timeMin = time.toISO();
-        const timeMax = time.plus({ days: 1 }).toISO();
+        const timeMin = time.startOf("day").toISO();
+        const timeMax = time.endOf("day").toISO();
 
         calendars.map(async(calendar) => {
             if (!calendar.id)
