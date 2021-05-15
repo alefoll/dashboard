@@ -31,7 +31,7 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
         const timeMin = time.startOf("day").toISO();
         const timeMax = time.endOf("day").toISO();
 
-        calendars.map(async(calendar) => {
+        const calendarsEvents = calendars.map(async(calendar) => {
             if (!calendar.id)
                 throw new Error;
 
@@ -41,11 +41,13 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
                 timeMax,
             })).result.items || [];
 
-            // console.log(calendar);
+            return events.map((_) => { return { ..._, color: calendar.backgroundColor || "" }});
+        });
 
-            this.setState({
-                events: [...this.state.events, ...events.map((_) => { return { ..._, color: calendar.backgroundColor || "" }})],
-            });
+        const events = (await Promise.all(calendarsEvents)).flat();
+
+        this.setState({
+            events,
         });
     }
 
