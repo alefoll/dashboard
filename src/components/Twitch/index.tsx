@@ -158,16 +158,7 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
         return result;
     }
 
-
-    componentDidMount() {
-        this.refresh();
-
-        setInterval(() => {
-            this.refresh();
-        }, 60_000);
-    }
-
-    private readonly refresh = async() => {
+    private readonly getData = async() => {
         const me = (await this.getUsers())[0];
 
         const userFollow = await this.getUserChannels(me);
@@ -191,6 +182,14 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
             notation: "compact",
 
         }).format(number);
+    }
+
+    componentDidMount() {
+        this.getData();
+
+        setInterval(() => {
+            this.getData();
+        }, 60_000);
     }
 
     render() {

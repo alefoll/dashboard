@@ -18,12 +18,6 @@ export class Time extends React.PureComponent<{}, TimeState> {
         this.state = this.getDateTime();
     }
 
-    componentDidMount() {
-        setInterval(() => {
-            this.setState(this.getDateTime());
-        }, 500);
-    }
-
     private getDateTime = (): TimeState => {
         const dateTime = DateTime.now();
 
@@ -32,6 +26,12 @@ export class Time extends React.PureComponent<{}, TimeState> {
             date: dateTime.toFormat("cccc dd LLLL yyyy"),
             time: dateTime.toFormat("HH:mm:ss"),
         }
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.setState(this.getDateTime());
+        }, 500);
     }
 
     render() {

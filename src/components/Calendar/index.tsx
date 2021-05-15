@@ -23,7 +23,7 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
         // console.log(colors);
     }
 
-    async componentDidMount() {
+    private async getData() {
         const calendars = (await gapi.client.calendar.calendarList.list()).result.items || [];
 
         const time = DateTime.now();
@@ -47,6 +47,14 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
                 events: [...this.state.events, ...events.map((_) => { return { ..._, color: calendar.backgroundColor || "" }})],
             });
         });
+    }
+
+    componentDidMount() {
+        this.getData();
+
+        setInterval(() => {
+            this.getData();
+        }, 60_000);
     }
 
     render() {
