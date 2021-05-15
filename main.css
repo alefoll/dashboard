@@ -112,7 +112,7 @@ body,
 
 .twitch--stream {
     background-color: #26262b;
-    width: 400px;
+    width: 450px;
     border-radius: 8px;
     margin: 16px 16px 0 0;
     display: flex;
@@ -163,12 +163,14 @@ body,
 
 .twitch--stream__viewer {
     font-size: 26px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .twitch--stream__viewer::before {
     content: "";
     display: inline-block;
-    margin: 0 4px 2px 0;
+    margin: 0 8px 0 4px;
     height: 8px;
     width: 8px;
     border-radius: 50%;
