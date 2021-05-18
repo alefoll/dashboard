@@ -8,7 +8,6 @@ import { App } from "@components/App";
 
 import "../assets/favicon.png";
 import "../assets/france.svg";
-import "../assets/GoogleCalendar.svg";
 import "../assets/TwitchGlitchPurple.svg";
 
 ReactDOM.render((

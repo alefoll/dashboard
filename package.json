@@ -1,6 +1,6 @@
 {
   "name": "dashboard",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "main": "dist/main.js",
   "repository": "git@github.com:alefoll/dashboard.git",
   "license": "MIT",

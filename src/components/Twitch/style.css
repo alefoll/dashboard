@@ -77,13 +77,21 @@
     content: "";
     display: inline-block;
     margin: 0 8px 0 4px;
-    height: 8px;
-    width: 8px;
+    height: 14px;
+    width: 14px;
     border-radius: 50%;
-    background-color: red;
+    background-color: #ff0000;
 }
 
 .twitch--stream__game {
     font-size: 24px;
 }
 
+.twitch--more {
+    text-align: right;
+    background-color: #323248;
+    border-radius: 8px;
+    margin: 16px auto;
+    font-size: 24px;
+    padding: 12px 24px;
+}

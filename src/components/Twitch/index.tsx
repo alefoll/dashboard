@@ -197,11 +197,14 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
 
         if (!streams.length) { return (<></>) };
 
+        const streamToShow = streams.slice(0, 4);
+        const streamRemaining = streams.slice(4);
+
         return (
             <div className="twitch">
                 <img src="./assets/TwitchGlitchPurple.svg" alt="Twitch" className="twitch-logo" />
 
-                { streams.map((stream) => {
+                { streamToShow.map((stream) => {
                     return (
                         <div key={ stream.id } className="twitch--stream">
                             <div className="twitch--stream__pic">
@@ -220,6 +223,12 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
                         </div>
                     );
                 }) }
+
+                { streamRemaining.length > 0 && (
+                    <div className="twitch--more">
+                        et { streamRemaining.length } de plus
+                    </div>
+                ) }
             </div>
         )
     }
