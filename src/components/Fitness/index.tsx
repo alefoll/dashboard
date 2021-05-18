@@ -123,7 +123,7 @@ export class Fitness extends React.Component<{}, FitnessState> {
 
         return (
             <div className="fitness">
-                <Line type="line" height={ 370 } width={ 1920 } data={ this.state.data } options={ this.options } />
+                <Line type="line" height={ 350 } width={ 1920 } data={ this.state.data } options={ this.options } />
             </div>
         );
     }

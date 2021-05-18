@@ -7,6 +7,7 @@ import "./style.css";
 type TimeState = {
     date: string,
     time: string,
+    timeFrance: string,
 }
 
 export class Time extends React.PureComponent<{}, TimeState> {
@@ -20,11 +21,13 @@ export class Time extends React.PureComponent<{}, TimeState> {
 
     private getDateTime = (): TimeState => {
         const dateTime = DateTime.now();
+        const dateTimeFrance = dateTime.setZone("Europe/Paris");
 
         return {
             // https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens
             date: dateTime.toFormat("cccc dd LLLL yyyy"),
             time: dateTime.toFormat("HH:mm:ss"),
+            timeFrance: dateTimeFrance.toFormat("HH:mm:ss"),
         }
     }
 
@@ -44,6 +47,13 @@ export class Time extends React.PureComponent<{}, TimeState> {
 
                     <div className="time--container__time">
                         { this.state.time }
+                    </div>
+
+                    <div className="time-france time--container">
+                        <div className="time--container__time">
+                            <img src="./assets/france.svg" alt="France" className="france-icon" />
+                            { this.state.timeFrance }
+                        </div>
                     </div>
                 </div>
             </div>

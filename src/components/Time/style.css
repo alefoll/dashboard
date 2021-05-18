@@ -17,7 +17,7 @@
 
 .time--container__date {
     position: absolute;
-    top: -56px;
+    top: -36px;
     left: 0;
     right: 0;
     text-align: center;
@@ -27,4 +27,28 @@
 .time--container__time {
     font-size: 256px;
     font-variant-numeric: tabular-nums;
+}
+
+.time-france {
+    position: absolute;
+    bottom: -36px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-france .time--container__time {
+    font-size: 56px;
+    position: relative;
+}
+
+.france-icon {
+    height: 56px;
+    position: absolute;
+    left: -64px;
+    top: 8px;
 }
