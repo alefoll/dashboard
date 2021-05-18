@@ -27,7 +27,7 @@ export class Time extends React.PureComponent<{}, TimeState> {
             // https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens
             date: dateTime.toFormat("cccc dd LLLL"),
             time: dateTime.toFormat("HH:mm:ss"),
-            timeFrance: dateTimeFrance.toFormat("HH:mm:ss"),
+            timeFrance: dateTimeFrance.toFormat("HH:mm"),
         }
     }
 
