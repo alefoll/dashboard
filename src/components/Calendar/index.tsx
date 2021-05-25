@@ -83,8 +83,6 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
                         </svg>
                     </div>
 
-                    Aujourd'hui :
-
                     { this.state.events.map(event => <Event key={ event.id } { ...event } />) }
                 </div>
             </div>

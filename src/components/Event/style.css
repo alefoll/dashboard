@@ -1,0 +1,37 @@
+.event {
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.event:last-of-type {
+    margin-bottom: 0;
+}
+
+.event--dot,
+.event--line {
+    left: 6px;
+    width: 8px;
+    position: absolute;
+}
+
+.event--dot {
+    height: 8px;
+    top: 14px;
+    border-radius: 50%;
+}
+
+.event--line {
+    top: 10px;
+    bottom: 10px;
+    border-radius: 8px;
+}
+
+.event--content {
+    margin-left: 28px;
+}
+
+.event--content__duration {
+    font-size: 24px;
+    font-weight: 300;
+    color: #cccccc
+}

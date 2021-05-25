@@ -1,6 +1,6 @@
-import { DateTime } from "luxon";
 import React from "react";
 
+import { DateTime } from "luxon";
 import { Line } from 'react-chartjs-2';
 
 import "./style.css";
