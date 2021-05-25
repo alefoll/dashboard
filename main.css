@@ -75,7 +75,7 @@ body,
 .calendar--container {
     position: relative;
     margin: 0 auto;
-    padding: 16px 24px 24px;
+    padding: 20px 24px;
     background-color: #323248;
     border-radius: 4px;
 }
