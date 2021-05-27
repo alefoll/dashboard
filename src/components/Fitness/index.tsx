@@ -30,7 +30,7 @@ export class Fitness extends React.Component<{}, FitnessState> {
                 ticks: {
                     color: "#ffffff",
                     font: {
-                        family: "Product Sans",
+                        family: "GoogleSans",
                         size: 20,
                     },
                 },
@@ -43,7 +43,7 @@ export class Fitness extends React.Component<{}, FitnessState> {
                     color: "#ffffff",
                     autoSkipPadding: 36,
                     font: {
-                        family: "Product Sans",
+                        family: "GoogleSans",
                         size: 20,
                     },
                 },
