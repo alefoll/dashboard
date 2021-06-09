@@ -105,8 +105,6 @@ export class Spotify extends React.PureComponent<{}, SpotifyState> {
         const player = await this.api();
 
         if (player) {
-            console.log(player);
-
             this.setState({ player });
         }
     }
@@ -128,6 +126,17 @@ export class Spotify extends React.PureComponent<{}, SpotifyState> {
     render() {
         const { token, player } = this.state;
 
+        if (!token) {
+            return (
+                <div className="spotify">
+                    <button className="spotify--login" onClick={ this.getToken }>Spotify login</button>
+                </div>
+            )
+        }
+
+        if (!player)
+            return null;
+
         const variants = {
             hidden  : { opacity: 0, y: "-100%" },
             visible : { opacity: 1, y: 0 },
@@ -135,22 +144,18 @@ export class Spotify extends React.PureComponent<{}, SpotifyState> {
 
         return (
             <div className="spotify">
-                { !token && <button className="spotify--login" onClick={ this.getToken }>Spotify login</button> }
-
                 <AnimatePresence>
-                    { player &&
-                        <motion.div className="spotify--player" transition={{ duration: 0.3 }} initial="hidden" animate="visible" variants={ variants } exit={ variants.hidden }>
-                            <div className="spotify--player__cover">
-                                <img src={ player.item.album.images[0].url } alt={ this.getArtists(player.item.artists) } />
-                            </div>
+                    <motion.div className="spotify--player" transition={{ duration: 0.3 }} initial="hidden" animate="visible" variants={ variants } exit={ variants.hidden }>
+                        <div className="spotify--player__cover">
+                            <img src={ player.item.album.images[0].url } alt={ this.getArtists(player.item.artists) } />
+                        </div>
 
-                            <div className="spotify--player__wrapper">
-                                <div className="spotify--player__track">{ player.item.name }</div>
-                                <div className="spotify--player__artists">{ this.getArtists(player.item.artists) }</div>
-                                <div className="spotify--player__progress" style={{ width: ((player.progress_ms / player.item.duration_ms) * 100) + "%" }}></div>
-                            </div>
-                        </motion.div>
-                    }
+                        <div className="spotify--player__wrapper">
+                            <div className="spotify--player__track">{ player.item.name }</div>
+                            <div className="spotify--player__artists">{ this.getArtists(player.item.artists) }</div>
+                            <div className="spotify--player__progress" style={{ width: ((player.progress_ms / player.item.duration_ms) * 100) + "%" }}></div>
+                        </div>
+                    </motion.div>
                 </AnimatePresence>
             </div>
         )
