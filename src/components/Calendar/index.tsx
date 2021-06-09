@@ -1,5 +1,6 @@
 import React from "react";
 
+import { motion, AnimatePresence } from "framer-motion";
 import { DateTime } from "luxon";
 
 import { Event } from "@components/Event";
@@ -67,9 +68,14 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
 
         if (!this.state.events.length) { return (<></>) };
 
+        const variants = {
+            hidden  : { opacity: 0, x: "-100%" },
+            visible : { opacity: 1, x: 0 },
+        }
+
         return (
-            <div className="calendar">
-                <div className="calendar--container">
+            <AnimatePresence>
+                <motion.div className="calendar" transition={{ duration: 0.3 }} initial="hidden" animate="visible" variants={ variants } exit={ variants.hidden }>
                     <div className="calendar--logo">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="186 38 76 76">
                             <path fill="#fff" d="M244 56h-40v40h40V56z"/>
@@ -83,9 +89,11 @@ export class Calendar extends React.PureComponent<{}, CalendarState> {
                         </svg>
                     </div>
 
-                    { this.state.events.map(event => <Event key={ event.id } { ...event } />) }
-                </div>
-            </div>
+                    <div className="calendar--container">
+                        { this.state.events.map(event => <Event key={ event.id } { ...event } />) }
+                    </div>
+                </motion.div>
+            </AnimatePresence>
         )
     }
 }

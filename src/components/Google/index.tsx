@@ -42,7 +42,7 @@ export class Google extends React.PureComponent<{}, GoogleState> {
         ]
 
         await gapi.client.init({
-            clientId      : config.google.clientId,
+            clientId      : config.google.clientID,
             discoveryDocs : [
                 "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
                 "https://www.googleapis.com/discovery/v1/apis/fitness/v1/rest"

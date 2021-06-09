@@ -1,6 +1,9 @@
 {
     "google": {
-        "clientId": "574932380212-29ol8a80qrnec3hg7aeft0j67fifpol2.apps.googleusercontent.com"
+        "clientID": "574932380212-29ol8a80qrnec3hg7aeft0j67fifpol2.apps.googleusercontent.com"
+    },
+    "spotify": {
+        "clientID": "8956211df7c5459899f58abc3e5ba715"
     },
     "twitch": {
         "clientID": "gvmbg22kqruvfibmxm4dm5datn9yis"

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Google } from "@components/Google";
+import { Spotify } from "@components/Spotify";
 import { Time } from "@components/Time";
 import { Twitch } from "@components/Twitch";
 
@@ -12,6 +13,7 @@ export class App extends React.PureComponent {
         return (
             <main className="app">
                 <Google />
+                <Spotify />
                 <Time />
                 <Twitch />
             </main>

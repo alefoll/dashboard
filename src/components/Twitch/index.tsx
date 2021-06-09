@@ -1,5 +1,6 @@
 import React from "react";
 
+import { motion, AnimatePresence } from "framer-motion";
 import { Settings } from "luxon";
 
 import config from "../../../config.json";
@@ -61,9 +62,9 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
 
         Settings.defaultLocale = "fr";
 
-        let token = window.localStorage.getItem("token");
+        let token = window.localStorage.getItem("twitch-token");
 
-        if (window.location.hash.length) {
+        if (window.location.hash.length && window.location.search.startsWith("?twitch")) {
             const hash = window.location.hash.slice(1);
 
             const hashParsed = hash.split("&").reduce((previous: any, current) => {
@@ -78,10 +79,10 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
             if (hashParsed.access_token != null) {
                 token = hashParsed.access_token;
 
-                window.localStorage.setItem("token", hashParsed.access_token);
+                window.localStorage.setItem("twitch-token", hashParsed.access_token);
             }
 
-            window.location.hash = "";
+            history.replaceState(null, "", window.location.origin + window.location.pathname);
         }
 
         if (token) {
@@ -108,13 +109,17 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
             return request.json();
         } catch (error) {
             if (error === "Request error") {
-                window.localStorage.removeItem("token");
+                window.localStorage.removeItem("twitch-token");
 
                 this.setState({
                     token: undefined
                 });
             }
         }
+    }
+
+    private readonly getToken = () => {
+        window.location.assign(`https://id.twitch.tv/oauth2/authorize?client_id=${ config.twitch.clientID }&redirect_uri=${ window.location.href }?twitch&response_type=token`);
     }
 
     private readonly getStreams = async (userIDs: string[], pagination: string = ""): Promise<Stream[]> => {
@@ -180,19 +185,28 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
         return new Intl.NumberFormat("en", {
             // @ts-expect-error
             notation: "compact",
-
         }).format(number);
     }
 
     componentDidMount() {
-        this.getData();
-
-        setInterval(() => {
+        if (this.state.token) {
             this.getData();
-        }, 60_000);
+
+            setInterval(() => {
+                this.getData();
+            }, 60_000);
+        }
     }
 
     render() {
+        if (!this.state.token) {
+            return (
+                <div className="twitch">
+                    <button className="twitch--login" onClick={ this.getToken }>Twitch login</button>
+                </div>
+            );
+        }
+
         const { streams } = this.state;
 
         if (!streams.length) { return (<></>) };
@@ -200,27 +214,32 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
         const streamToShow = streams.slice(0, 4);
         const streamRemaining = streams.slice(4);
 
+        const variants = {
+            hidden  : { opacity: 0, x: "100%" },
+            visible : { opacity: 1, x: 0 },
+        }
+
         return (
             <div className="twitch">
-                <img src="./assets/TwitchGlitchPurple.svg" alt="Twitch" className="twitch-logo" />
-
                 { streamToShow.map((stream) => {
                     return (
-                        <div key={ stream.id } className="twitch--stream">
-                            <div className="twitch--stream__pic">
-                                <img src={ this.getThumbnail(stream.thumbnail_url) + "?" + Date.now() } alt={ stream.user_name } />
-                            </div>
-
-                            <div className="twitch--stream__container">
-                                <div className="twitch--stream__info">
-                                    <h2 className="twitch--stream__name">{ stream.user_name }</h2>
-                                    <span className="twitch--stream__viewer">{ this.format(stream.viewer_count) }</span>
+                        <AnimatePresence key={ stream.id } >
+                            <motion.div className="twitch--stream" transition={{ duration: 0.3 }} initial="hidden" animate="visible" variants={ variants } exit={ variants.hidden }>
+                                <div className="twitch--stream__pic">
+                                    <img src={ this.getThumbnail(stream.thumbnail_url) + "?" + Date.now() } alt={ stream.user_name } />
                                 </div>
 
-                                <h3 className="twitch--stream__game">{ stream.game_name }</h3>
-                            </div>
+                                <div className="twitch--stream__container">
+                                    <div className="twitch--stream__info">
+                                        <h2 className="twitch--stream__name">{ stream.user_name }</h2>
+                                        <span className="twitch--stream__viewer">{ this.format(stream.viewer_count) }</span>
+                                    </div>
 
-                        </div>
+                                    <h3 className="twitch--stream__game">{ stream.game_name }</h3>
+                                </div>
+
+                            </motion.div>
+                        </AnimatePresence>
                     );
                 }) }
 
