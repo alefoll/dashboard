@@ -97,6 +97,96 @@ body,
 }
 
 
+.spotify {
+    position: absolute;
+    z-index: 400;
+    width: 450px;
+    margin: 16px 0 0 0;
+    left: calc(50% - 225px);
+}
+
+.spotify--login {
+    display: flex;
+    justify-content: center;
+}
+
+.spotify--login {
+    color: #fff;
+    font-size: 24px;
+    background-color: #1ed760;
+    text-decoration: none;
+    border-radius: 500px;
+    padding: 11px 32px 9px;
+    transition-property: all;
+    transition-duration: .3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.spotify--login:hover {
+    background-color: #116e32;;
+}
+
+.spotify--player {
+    background-color: #323248;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.spotify--player__cover {
+    height: 90px;
+    max-width: 100%;
+    flex: 0 0 auto;
+}
+
+.spotify--player__cover img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.spotify--player__wrapper {
+    position: relative;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-left: 16px;
+}
+
+.spotify--player__track,
+.spotify--player__artists {
+    font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.spotify--player__track {
+    font-size: 30px;
+}
+
+.spotify--player__artists {
+    font-size: 24px;
+    color: #bebebe;
+}
+
+.spotify--player__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    border-radius: 0 4px 4px 0;
+    background-color: #1ed760;
+}
+
 .time {
     position: absolute;
     top: 0;
@@ -162,12 +252,23 @@ body,
     z-index: 300;
 }
 
-.twitch-logo {
-    position: absolute;
-    left: -56px;
-    top: 16px;
-    height: 48px;
-    width: 48px;
+.twitch--login {
+    margin: 16px;
+    color: #fff;
+    font-size: 24px;
+    background-color: #9147ff;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 11px 32px 9px;
+    transition-property: all;
+    transition-duration: .3s;
+    border-width: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.twitch--login:hover {
+    background-color: #772ce8;
 }
 
 .twitch--stream {
@@ -177,7 +278,18 @@ body,
     margin: 16px 16px 0 0;
     display: flex;
     align-items: center;
-    overflow: hidden;
+}
+
+.twitch--stream:first-of-type::before {
+    content: "";
+    background-image: url(./assets/TwitchGlitchPurple.svg);
+    background-repeat: no-repeat;
+    background-size: 48px;
+    position: absolute;
+    left: -56px;
+    top: 0;
+    height: 48px;
+    width: 48px;
 }
 
 .twitch--stream__pic {
@@ -239,6 +351,7 @@ body,
 
 .twitch--stream__game {
     font-size: 24px;
+    color: #bebebe;
 }
 
 .twitch--more {
