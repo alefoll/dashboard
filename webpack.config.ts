@@ -52,7 +52,12 @@ export default function(): Configuration {
         resolve: {
             extensions: [".tsx", ".ts", ".js"],
             // @ts-ignore
-            plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })]
+            plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
+            fallback: {
+                buffer: require.resolve("buffer"),
+                crypto: require.resolve("crypto-browserify"),
+                stream: require.resolve("stream-browserify"),
+            }
         },
         output: {
             publicPath : "/dashboard/",

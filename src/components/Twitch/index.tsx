@@ -164,6 +164,9 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
     }
 
     private readonly getData = async() => {
+        if (!this.state.token)
+            return;
+
         const me = (await this.getUsers())[0];
 
         const userFollow = await this.getUserChannels(me);
@@ -183,19 +186,16 @@ export class Twitch extends React.PureComponent<{}, TwitchState> {
 
     private readonly format = (number: number) => {
         return new Intl.NumberFormat("en", {
-            // @ts-expect-error
             notation: "compact",
         }).format(number);
     }
 
     componentDidMount() {
-        if (this.state.token) {
-            this.getData();
+        this.getData();
 
-            setInterval(() => {
-                this.getData();
-            }, 60_000);
-        }
+        setInterval(() => {
+            this.getData();
+        }, 60_000);
     }
 
     render() {
