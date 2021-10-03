@@ -2,7 +2,7 @@
   font-family: 'GoogleSans';
   font-style: normal;
   font-weight: 300 800;
-  src: url(./assets/GoogleSans.woff2) format('woff2-variations');
+  src: url(assets/GoogleSans.woff2) format('woff2-variations');
 }
 
 
@@ -282,7 +282,7 @@ body,
 
 .twitch--stream:first-of-type::before {
     content: "";
-    background-image: url(./assets/TwitchGlitchPurple.svg);
+    background-image: url(assets/TwitchGlitchPurple.svg);
     background-repeat: no-repeat;
     background-size: 48px;
     position: absolute;
