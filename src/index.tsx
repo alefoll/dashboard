@@ -10,6 +10,9 @@ import "../assets/favicon.png";
 import "../assets/france.svg";
 import "../assets/TwitchGlitchPurple.svg";
 
+// @ts-expect-error
+console.log(`[APP] Version ${ APP_VERSION }`);
+
 ReactDOM.render((
     <App />
 ), document.querySelector("#app"));

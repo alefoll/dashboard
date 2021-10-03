@@ -1,7 +1,7 @@
 import path from "path";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import { Configuration as WebpackConfiguration } from "webpack";
+import { Configuration as WebpackConfiguration, DefinePlugin } from "webpack";
 import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 
 interface Configuration extends WebpackConfiguration {
@@ -54,8 +54,13 @@ export default function(): Configuration {
             filename : "main.js",
             path     : path.resolve(__dirname, "dist")
         },
-        // @ts-expect-error
-        plugins: [new MiniCssExtractPlugin()],
+        plugins: [
+            // @ts-expect-error
+            new MiniCssExtractPlugin(),
+            new DefinePlugin({
+                APP_VERSION: JSON.stringify(require("./package.json").version),
+            }),
+        ],
         devServer: {
             static: {
                 directory: path.resolve(__dirname, "dist"),
