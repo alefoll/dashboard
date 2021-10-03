@@ -9,6 +9,7 @@ import "./style.css";
 
 interface GoogleState {
     loaded: boolean,
+    GoogleAuth: undefined | gapi.auth2.GoogleAuth,
 }
 
 export class Google extends React.PureComponent<{}, GoogleState> {
@@ -17,11 +18,28 @@ export class Google extends React.PureComponent<{}, GoogleState> {
 
         this.state = {
             loaded: false,
+            GoogleAuth: undefined,
         }
     }
 
     componentDidMount() {
         gapi.load("client", this.start);
+    }
+
+    private readonly refreshTokens = async() => {
+        const GoogleAuth = this.state.GoogleAuth!;
+
+        if (!GoogleAuth.isSignedIn.get()) {
+            GoogleAuth.signIn({
+                ux_mode: "redirect",
+            });
+        }
+
+        await GoogleAuth.currentUser.get().reloadAuthResponse();
+
+        setTimeout(() => {
+            this.refreshTokens();
+        }, 60_000 * 60 * 24); // 1 day
     }
 
     private start = async() => {
@@ -52,7 +70,12 @@ export class Google extends React.PureComponent<{}, GoogleState> {
 
         this.setState({
             loaded: true,
+            GoogleAuth: gapi.auth2.getAuthInstance(),
         });
+
+        setTimeout(() => {
+            this.refreshTokens();
+        }, 60_000 * 60 * 24); // 1 day
     }
 
     render() {
@@ -64,6 +87,6 @@ export class Google extends React.PureComponent<{}, GoogleState> {
                 <Calendar />
                 <Fitness />
             </>
-        )
+        );
     }
 }

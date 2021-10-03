@@ -218,6 +218,10 @@ export class Spotify extends React.PureComponent<{}, SpotifyState> {
 
         window.localStorage.setItem(this.access_token_key,  response.access_token);
         window.localStorage.setItem(this.refresh_token_key, response.refresh_token);
+
+        setTimeout(() => {
+            this.refreshTokens();
+        }, 60_000 * 59); // 59 minutes
     }
 
     private readonly getData = async() => {
@@ -243,9 +247,9 @@ export class Spotify extends React.PureComponent<{}, SpotifyState> {
             this.getData();
         }, 1_000);
 
-        setInterval(() => {
+        setTimeout(() => {
             this.refreshTokens();
-        }, 60_000 * 30); // 30 minutes
+        }, 60_000 * 59); // 59 minutes
     }
 
     render() {

@@ -19,29 +19,21 @@ export default function(): Configuration {
                     exclude : /node_modules/
                 }, {
                     test    : /\.html$/,
-                    loader  : "file-loader",
-                    exclude : /node_modules/,
-                    options : {
-                        name       : "[name].[ext]",
-                        publicPath : "/"
+                    type    : "asset/resource",
+                    generator : {
+                        filename: "[name][ext]",
                     }
                 }, {
                     test    : /\.(svg|woff2)$/,
-                    loader  : "file-loader",
-                    exclude : /node_modules/,
-                    options : {
-                        name       : "[name].[ext]",
-                        outputPath : "assets/",
-                        publicPath : "./assets/"
+                    type    : "asset/resource",
+                    generator : {
+                        filename: "assets/[name][ext]",
                     }
                 }, {
                     test    : /favicon\.png$/,
-                    loader  : "file-loader",
-                    exclude : /node_modules/,
-                    options : {
-                        name       : "[name].[ext]",
-                        outputPath : "/",
-                        publicPath : "./"
+                    type    : "asset/resource",
+                    generator : {
+                        filename: "[name][ext]",
                     }
                 }, {
                     test    : /\.css$/,
@@ -51,7 +43,6 @@ export default function(): Configuration {
         },
         resolve: {
             extensions: [".tsx", ".ts", ".js"],
-            // @ts-ignore
             plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
             fallback: {
                 buffer: require.resolve("buffer"),
@@ -60,18 +51,19 @@ export default function(): Configuration {
             }
         },
         output: {
-            publicPath : "/dashboard/",
-            filename   : "main.js",
-            path       : path.resolve(__dirname, "dist")
+            filename : "main.js",
+            path     : path.resolve(__dirname, "dist")
         },
         // @ts-expect-error
         plugins: [new MiniCssExtractPlugin()],
         devServer: {
-            contentBase      : path.resolve(__dirname, "dist"),
-            compress         : false,
-            host             : "0.0.0.0",
-            port             : 3000,
-            disableHostCheck : true
+            static: {
+                directory: path.resolve(__dirname, "dist"),
+            },
+            compress     : false,
+            host         : "0.0.0.0",
+            port         : 8000,
+            allowedHosts : "all",
         }
     }
 };

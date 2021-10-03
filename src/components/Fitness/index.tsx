@@ -61,7 +61,7 @@ export class Fitness extends React.Component<{}, FitnessState> {
 
     private async getData() {
         const endDate   = DateTime.now();
-        const startDate = endDate.minus({ month: 4 });
+        const startDate = endDate.minus({ months: 4 });
 
         const format = "dd LLL";
 
@@ -123,7 +123,7 @@ export class Fitness extends React.Component<{}, FitnessState> {
 
         return (
             <div className="fitness">
-                <Line type="line" height={ 350 } width={ 1920 } data={ this.state.data } options={ this.options } />
+                <Line height={ 350 } width={ 1920 } data={ this.state.data } options={ this.options } />
             </div>
         );
     }
