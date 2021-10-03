@@ -29,12 +29,6 @@ export class Google extends React.PureComponent<{}, GoogleState> {
     private readonly refreshTokens = async() => {
         const GoogleAuth = this.state.GoogleAuth!;
 
-        if (!GoogleAuth.isSignedIn.get()) {
-            GoogleAuth.signIn({
-                ux_mode: "redirect",
-            });
-        }
-
         await GoogleAuth.currentUser.get().reloadAuthResponse();
 
         setTimeout(() => {
@@ -68,10 +62,18 @@ export class Google extends React.PureComponent<{}, GoogleState> {
             scope : scopes.join(" "),
         });
 
+        const GoogleAuth = gapi.auth2.getAuthInstance();
+
         this.setState({
             loaded: true,
-            GoogleAuth: gapi.auth2.getAuthInstance(),
+            GoogleAuth,
         });
+
+        if (!GoogleAuth.isSignedIn.get()) {
+            await GoogleAuth.signIn({
+                ux_mode: "redirect",
+            });
+        }
 
         setTimeout(() => {
             this.refreshTokens();
